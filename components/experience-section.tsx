@@ -8,6 +8,7 @@ import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
 
 type ExperienceItem = {
+  image?: string;
   year: string;
   title: string;
   company: string;
@@ -17,8 +18,7 @@ type ExperienceItem = {
 
 const experienceData: ExperienceItem[] = [
   {
-    image:
-      "https://w3barcelona.es/wp-content/uploads/2025/02/W3BarcelonaBlanco.png",
+    image: "/images/fotos/w3logo.png",
     year: "2025 - Presente",
     title: "Desarrollador Full Stack",
     company: "W3 Barcelona",
@@ -27,6 +27,7 @@ const experienceData: ExperienceItem[] = [
     tags: ["PHP", "Symfony", "Twig", "XAMPP", "Git", "Gitlab", "phpMyAdmin"],
   },
   {
+    image: "/images/fotos/sertranslogo.png",
     year: "2022 - Jun 2022",
     title: "Técnico en Sistemas",
     company: "Sertrans",
@@ -38,6 +39,7 @@ const experienceData: ExperienceItem[] = [
 
 const educationData: ExperienceItem[] = [
   {
+    image: "/images/fotos/llefialogo.jpg",
     year: "2022 - 2025",
     title: "DAW (Desarrollo de Aplicaciones Web)",
     company: "FPLlefià",
@@ -52,6 +54,7 @@ const educationData: ExperienceItem[] = [
     ],
   },
   {
+    image: "/images/fotos/llefialogo.jpg",
     year: "2020 - 2022",
     title: "SMX (Sistemas Microinformáticos y Redes)",
     company: "FPLlefià",
@@ -74,8 +77,7 @@ export function ExperienceSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-3xl md:text-4xl font-bold"
-        >
+          className="text-3xl md:text-4xl font-bold">
           Experiencia & Formación
         </motion.h2>
         <motion.p
@@ -83,8 +85,7 @@ export function ExperienceSection() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-muted-foreground mt-3"
-        >
+          className="text-muted-foreground mt-3">
           Mi trayectoria profesional y académica
         </motion.p>
       </div>
@@ -98,8 +99,7 @@ export function ExperienceSection() {
               activeTab === "experience"
                 ? "bg-primary text-primary-foreground shadow-md"
                 : "hover:bg-muted"
-            }`}
-          >
+            }`}>
             <Briefcase className="h-4 w-4" />
             <span>Experiencia</span>
           </button>
@@ -109,8 +109,7 @@ export function ExperienceSection() {
               activeTab === "education"
                 ? "bg-primary text-primary-foreground shadow-md"
                 : "hover:bg-muted"
-            }`}
-          >
+            }`}>
             <GraduationCap className="h-4 w-4" />
             <span>Formación</span>
           </button>
@@ -124,8 +123,7 @@ export function ExperienceSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.3 }}
-        >
+          transition={{ duration: 0.3 }}>
           <div className="grid gap-8">
             {(activeTab === "experience" ? experienceData : educationData).map(
               (item, index) => (
@@ -151,21 +149,20 @@ function TimelineCard({
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-    >
+      transition={{ duration: 0.5, delay: index * 0.1 }}>
       <Card className="overflow-hidden border-none shadow-lg hover:shadow-xl transition-shadow">
         <CardContent className="p-0">
           <div className="flex flex-col md:flex-row">
             {/* Barra lateral con imagen */}
-            <div className="bg-primary/10 p-6 md:w-48 flex items-center justify-center md:justify-start">
+            <div className="bg-primary/40 p-6 flex items-center justify-center">
               {item.image ? (
                 <img
                   src={item.image}
                   alt={`${item.title} - ${item.company}`}
-                  className="w-16 h-16 object-cover rounded-full"
+                  className="w-32 h-32 object-contain rounded-md"
                 />
               ) : (
-                <div className="w-16 h-16 flex items-center justify-center bg-muted rounded-full">
+                <div className="w-32 h-32 flex items-center justify-center bg-muted rounded-md">
                   <span className="text-sm text-muted-foreground">
                     Sin imagen
                   </span>
@@ -179,7 +176,7 @@ function TimelineCard({
                 {item.year}
               </span>
               <h3 className="text-xl font-bold mb-1">{item.title}</h3>
-              <p className="text-primary mb-3">{item.company}</p>
+              <p className="text-primary/90 mb-3">{item.company}</p>
               <p className="text-muted-foreground mb-4">{item.description}</p>
 
               <div className="flex flex-wrap gap-2">

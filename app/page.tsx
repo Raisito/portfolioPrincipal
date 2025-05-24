@@ -44,7 +44,10 @@ import {
   MaterialUIIcon,
   PostgreSQLIcon,
   GitIcon,
+  GitLabIcon,
   DockerIcon,
+  PhpMyAdminIcon,
+  RailwayIcon,
   WordpressIcon,
   VSCodeIcon,
   PostmanIcon,
@@ -54,6 +57,9 @@ import {
   BootstrapIcon,
   ShadcnIcon,
   SupabaseIcon,
+  ChatGPTIcon,
+  VercelIcon,
+  ViteIcon,
 } from "@/components/tech-icons";
 
 // Importar el nuevo componente de experiencia
@@ -180,13 +186,7 @@ export default function Portfolio() {
                   active={activeSection === "home"}
                   onClick={() => navigateTo("home")}
                 />
-                <MobileNavItem
-                  id="about"
-                  label="Sobre mí"
-                  icon={<User size={18} />}
-                  active={activeSection === "about"}
-                  onClick={() => navigateTo("about")}
-                />
+
                 <MobileNavItem
                   id="skills"
                   label="Habilidades"
@@ -268,13 +268,18 @@ export default function Portfolio() {
                   Ver proyectos
                   <Folder className="ml-2 h-4 w-4" />
                 </Button>
-                <Button variant="outline" onClick={() => navigateTo("about")}>
-                  Sobre mí & Contacto
+                <Button variant="outline" onClick={() => navigateTo("contact")}>
+                  Contacto
                   <Mail className="ml-2 h-4 w-4" />
                 </Button>
                 <Button
                   variant="outline"
-                  onClick={() => window.open("/CV.pdf", "_blank")}>
+                  onClick={() => {
+                    const link = document.createElement("a");
+                    link.href = "/CV.pdf";
+                    link.download = "CV.pdf";
+                    link.click();
+                  }}>
                   Descargar CV
                   <ExternalLink className="ml-2 h-4 w-4" />
                 </Button>
@@ -354,6 +359,7 @@ export default function Portfolio() {
                   { name: "TypeScript", icon: <TypeScriptIcon /> },
                   { name: "React", icon: <ReactIcon /> },
                   { name: "Next.js", icon: <NextJSIcon /> },
+                  { name: "Vite", icon: <ViteIcon /> },
                   { name: "Tailwind CSS", icon: <TailwindIcon /> },
                   { name: "Bootstrap", icon: <BootstrapIcon /> },
                   { name: "Material UI", icon: <MaterialUIIcon /> },
@@ -361,19 +367,20 @@ export default function Portfolio() {
                 ]}
               />
 
-              {/* Backend Technologies */}
+              {/* Backend */}
               <SkillCategory
                 title="Backend Development"
                 icon={<Layers className="h-6 w-6" />}
                 skills={[
                   { name: "PostgreSQL", icon: <PostgreSQLIcon /> },
                   { name: "MySQL", icon: <MySQLIcon /> },
-                  { name: "phpMyAdmin", icon: <MySQLIcon /> },
+                  { name: "phpMyAdmin", icon: <PhpMyAdminIcon /> },
                   { name: "RESTful APIs", icon: <NodeIcon /> },
                   { name: "PHP", icon: <PHPIcon /> },
                   { name: "Laravel", icon: <LaravelIcon /> },
                   { name: "Symfony", icon: <SymfonyIcon /> },
                   { name: "Supabase", icon: <SupabaseIcon /> },
+                  { name: "Railway", icon: <RailwayIcon /> },
                 ]}
               />
 
@@ -388,8 +395,10 @@ export default function Portfolio() {
                   { name: "Postman", icon: <PostmanIcon /> },
                   { name: "Wordpress", icon: <WordpressIcon /> },
                   { name: "GitHub", icon: <Github /> },
-                  { name: "Gitlab", icon: <GitIcon /> },
+                  { name: "Vercel", icon: <VercelIcon /> },
+                  { name: "Gitlab", icon: <GitLabIcon /> },
                   { name: "Figma", icon: <FigmaIcon /> },
+                  { name: "ChatGPT", icon: <ChatGPTIcon /> },
                 ]}
               />
             </div>
@@ -416,6 +425,41 @@ export default function Portfolio() {
             />
 
             <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <ProjectCard
+                title="DevMania"
+                description="Juego de memoria desarrollado con React, TypeScript y Tailwind CSS. Los datos del juego, como el puntaje, se almacenan en una base de datos, captando los datos desde una api"
+                image="/images/projects/devmania.png"
+                tags={[
+                  "HTML",
+                  "CSS",
+                  "Animations",
+                  "Responsive Design",
+                  "Wordpress",
+                  "PHP",
+                  "Git",
+                ]}
+                repoLink="https://github.com/LLPFP/DevMania-Wordpress"
+                demoLink="https://luis.w3bcn.es"
+                delay={0.2}
+              />
+              <ProjectCard
+                title="Memory Game"
+                description="Juego de memoria desarrollado con React, TypeScript y Tailwind CSS. Los datos del juego, como el puntaje, se almacenan en una base de datos, captando los datos desde una api"
+                image="/images/projects/memory.png"
+                tags={[
+                  "HTML",
+                  "CSS",
+                  "Animations",
+                  "Responsive Design",
+                  "React",
+                  "TypeScript",
+                  "Next.js",
+                  "API",
+                ]}
+                repoLink="https://github.com/LLPFP/memory-next"
+                demoLink="https://memory-next.vercel.app/home"
+                delay={0.2}
+              />
               <ProjectCard
                 title="Tetris"
                 description="Juego clásico de Tetris desarrollado con React, Bootstrap y CSS. Los datos del juego, como el puntaje, se almacenan en LocalStorage para mantener el progreso."
@@ -446,104 +490,97 @@ export default function Portfolio() {
             </div>
           </div>
         </section>
+        {/* Sección Contacto */}
         <section
           id="contact"
           ref={(el) => registerSection("contact", el)}
-          className="py-16 md:py-24 bg-gradient-to-b from-background to-muted/10">
-          <div className="container px-4 md:px-6 mx-auto">
+          className="flex flex-cols py-12 bg-gradient-to-b from-background to-muted/10">
+          <div className="container px-4 md:px-6 mx-auto max-w-2xl">
             <SectionHeader
               title="Contacto"
-              subtitle="¡Hablemos de tu próximo proyecto!"
+              subtitle="¿Tienes una idea para un proyecto? ¡Hablemos!"
             />
 
-            <div className="grid md:grid-cols-1 gap-12 mt-16">
-              {/* Contact Information */}
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="bg-gradient-to-br from-muted/20 to-muted/40 p-8 rounded-3xl shadow-lg space-y-8 hover:shadow-2xl transition-shadow duration-300">
-                <h3 className="text-4xl font-extrabold text-primary">
-                  Información de Contacto
-                </h3>
-                <ul className="space-y-6 text-muted-foreground text-lg">
-                  {[
-                    {
-                      label: "Nombre",
-                      value: "Luis Lopez Puig",
-                      icon: <User className="h-6 w-6 text-primary" />,
-                    },
-                    {
-                      label: "Email",
-                      value: "luis.lopu@hotmail.com",
-                      icon: <Mail className="h-6 w-6 text-primary" />,
-                    },
-                    {
-                      label: "Ubicación",
-                      value: "Badalona, Barcelona",
-                      icon: <Home className="h-6 w-6 text-primary" />,
-                    },
-                    {
-                      label: "Disponibilidad",
-                      value: "¡En búsqueda de nuevas oportunidades laborales!",
-                      icon: <Briefcase className="h-6 w-6 text-primary" />,
-                    },
-                  ].map((item, index) => (
-                    <motion.li
-                      key={index}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                      whileHover={{ scale: 1.05 }}
-                      className="flex items-start gap-6 p-6 rounded-xl bg-muted/10 hover:bg-muted/20 transition-colors shadow-md hover:shadow-lg">
-                      <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
-                        {item.icon}
-                      </div>
-                      <div>
-                        <span className="font-semibold text-foreground block text-xl">
-                          {item.label}:
-                        </span>
-                        <p className="text-muted-foreground text-base">
-                          {item.value}
-                        </p>
-                      </div>
-                    </motion.li>
-                  ))}
-                </ul>
-                <div className="pt-6 flex gap-4">
-                  {[
-                    {
-                      href: "https://github.com/LLPFP",
-                      icon: <Github className="h-5 w-5" />,
-                    },
-                    {
-                      href: "https://linkedin.com/in/luis-lópez-puig-824048258",
-                      icon: <Linkedin className="h-5 w-5" />,
-                    },
-                    {
-                      href: "https://twitter.com/",
-                      icon: <Twitter className="h-5 w-5" />,
-                    },
-                  ].map((social, index) => (
-                    <motion.a
-                      key={index}
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.95 }}
-                      href={social.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-10 h-10 rounded-full bg-muted flex items-center justify-center hover:bg-primary/10 transition-colors shadow-md hover:shadow-lg">
-                      {social.icon}
-                    </motion.a>
-                  ))}
+            {/* Extra Content */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="bg-muted/10 p-6 rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 mt-5">
+              <h4 className="text-lg font-semibold text-primary">
+                ¿Sabías que...?
+              </h4>
+              <p className="text-muted-foreground mt-2 text-sm">
+                Estoy constantemente aprendiendo nuevas tecnologías y mejorando
+                mis habilidades, para así ofrecer soluciones mejores y más
+                eficientes.
+              </p>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="bg-muted/20 p-6 rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 mt-8">
+              <h3 className="text-xl font-bold text-primary mb-4">
+                Información
+              </h3>
+              <ul className="space-y-3 text-muted-foreground text-sm">
+                <li className="flex items-center gap-3">
+                  <User className="h-4 w-4 text-primary" />
+                  Luis Lopez Puig
+                </li>
+                <li className="flex items-center gap-3">
+                  <Mail className="h-4 w-4 text-primary" />
+                  luis.lopu@hotmail.com
+                </li>
+                <li className="flex items-center gap-3">
+                  <Home className="h-4 w-4 text-primary" />
+                  Badalona, Barcelona
+                </li>
+              </ul>
+              <div className="pt-4 flex flex-col items-center gap-3">
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    const link = document.createElement("a");
+                    link.href = "/CV.pdf";
+                    link.download = "CV.pdf";
+                    link.click();
+                  }}
+                  className="mb-3">
+                  Descargar CV
+                  <ExternalLink className="ml-2 h-4 w-4" />
+                </Button>
+                <div className="flex justify-center gap-3">
+                  <motion.a
+                    whileHover={{ scale: 1.1 }}
+                    href="https://github.com/LLPFP"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-8 h-8 rounded-full bg-muted flex items-center justify-center hover:bg-primary/10 transition-colors shadow-md">
+                    <Github className="h-4 w-4" />
+                  </motion.a>
+                  <motion.a
+                    whileHover={{ scale: 1.1 }}
+                    href="https://linkedin.com/in/luis-lópez-puig-824048258"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-8 h-8 rounded-full bg-muted flex items-center justify-center hover:bg-primary/10 transition-colors shadow-md">
+                    <Linkedin className="h-4 w-4" />
+                  </motion.a>
+                  <motion.a
+                    whileHover={{ scale: 1.1 }}
+                    href="mailto:luis.lopu@hotmail.com"
+                    className="w-8 h-8 rounded-full bg-muted flex items-center justify-center hover:bg-primary/10 transition-colors shadow-md">
+                    <Mail className="h-4 w-4" />
+                  </motion.a>
                 </div>
-              </motion.div>
-            </div>
+              </div>
+            </motion.div>
           </div>
         </section>
-
         {/* Footer */}
         <footer className="py-6 border-t">
           <div className="container px-4 md:px-6 flex flex-col md:flex-row justify-center items-center">
