@@ -72,19 +72,33 @@ export default function Portfolio() {
 
   // Registrar referencias a las secciones
   const registerSection = (id: string, ref: HTMLElement | null) => {
-    if (ref) {
-      sectionsRef.current[id] = ref;
-    }
+    sectionsRef.current[id] = ref;
   };
 
   // Navegar a una sección
   const navigateTo = (sectionId: string) => {
     setActiveSection(sectionId);
-    setMenuOpen(false);
 
-    const section = sectionsRef.current[sectionId];
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
+    // Si estamos en móvil y el menú está abierto, ciérralo y espera antes de hacer scroll
+    if (window.innerWidth < 768 && menuOpen) {
+      setMenuOpen(false);
+      setTimeout(() => {
+        const section = sectionsRef.current[sectionId];
+        if (section) {
+          const yOffset = 70; // altura del header móvil
+          const y =
+            section.getBoundingClientRect().top + window.pageYOffset - yOffset;
+          window.scrollTo({ top: y, behavior: "smooth" });
+        }
+      }, 350); // 350ms coincide con la animación del menú (ajusta si tu animación es más lenta/rápida)
+    } else {
+      const section = sectionsRef.current[sectionId];
+      if (section) {
+        const yOffset = 0;
+        const y =
+          section.getBoundingClientRect().top + window.pageYOffset - yOffset;
+        window.scrollTo({ top: y, behavior: "smooth" });
+      }
     }
   };
 
@@ -149,7 +163,7 @@ export default function Portfolio() {
             onClick={() => navigateTo("projects")}
           />
           <CircleNavItem
-            id="contacto"
+            id="contact"
             label="contacto"
             icon={<Contact size={18} />}
             active={activeSection === "contact"}
