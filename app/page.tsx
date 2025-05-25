@@ -526,8 +526,8 @@ export default function Portfolio() {
                 ¿Sabías que...?
               </h4>
               <p className="text-muted-foreground mt-2 text-sm">
-                Estoy constantemente aprendiendo nuevas tecnologías y mejorando
-                mis habilidades, para así ofrecer soluciones mejores y más
+                Estoy constantemente aprendiendo nuevas tecnologías mejorando
+                mis habilidades, para así ofrecer mejores soluciones y más
                 eficientes.
               </p>
             </motion.div>
